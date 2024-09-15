@@ -1,0 +1,241 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #000000;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #101010;
+    padding: 20px;
+    display: flex;
+    justify-content: center; /* Center the logo horizontally */
+    align-items: center;
+    position: relative; /* Needed for absolute positioning of elements if required */
+}
+
+header .logo {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #111111;
+}
+
+/* Hero Section Styles */
+#hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    overflow: hidden;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 75%;
+    padding-top: 160px;
+    padding-bottom: 20px;
+}
+
+.hero-content h1 {
+    font-size: 72px;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+/* Button Group */
+.button-group {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Corrected Button Styles */
+.btn {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ffffff; 
+    background-color: #000000;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+    min-width: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn:hover {
+    background-color: #111111; 
+    transform: scale(1.05); 
+}
+
+/* Background Video and Overlay */
+#background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Darkens the video */
+    z-index: 1;
+}
+
+/* Scroll Down Button */
+.scroll-down {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    font-size: 2em;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.scroll-down:hover {
+    opacity: 0.7;
+}
+
+.scroll-down svg {
+    font-size: 48px;
+    color: #ffffff;
+}
+
+/* Add animation */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.scroll-down svg {
+    animation: bounce 2s infinite;
+}
+
+/* Hero Text */
+#hero h1 {
+    font-size: 3em;
+    color: #ffffff;
+}
+
+#hero p {
+    font-size: 1.2em;
+    margin-top: 10px;
+    color: #b3b3b3;
+}
+
+section {
+    padding: 50px;
+    text-align: center;
+}
+
+/* About Section */
+#about {
+    background-color: #1a1a1a;
+    padding: 60px 20px;
+}
+
+#about h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+#about p {
+    font-size: 1.1em;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Game Section */
+#game {
+    background-color: #212121;
+    padding: 60px 20px;
+}
+
+#game h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.game-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.game-info img {
+    max-width: 400px;
+    border-radius: 10px;
+}
+
+.game-description {
+    max-width: 500px;
+    text-align: left;
+}
+
+.game-description h3 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.game-description p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+/* Footer */
+footer {
+    background-color: #1f1f1f;
+    padding: 20px;
+    text-align: center;
+    color: #b3b3b3;
+}
