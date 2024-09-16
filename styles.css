@@ -27,7 +27,6 @@ header .logo {
     color: #ffffff;
 }
 
-
 nav ul {
     list-style: none;
     display: flex;
@@ -238,4 +237,69 @@ footer {
     padding: 20px;
     text-align: center;
     color: #b3b3b3;
+}
+
+/* Login & Signup Page Styles */
+form {
+    background-color: #1a1a1a;
+    padding: 40px;
+    max-width: 400px;
+    margin: 100px auto;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+}
+
+form h2 {
+    font-size: 2.2em;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #ffffff;
+}
+
+form label {
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    display: block;
+    color: #ffffff;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    background-color: #2b2b2b;
+    color: #ffffff;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+form input[type="submit"] {
+    background-color: #000000;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    padding: 15px;
+}
+
+form input[type="submit"]:hover {
+    background-color: #111111;
+    transform: scale(1.05);
+}
+
+form .form-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+form .form-footer a {
+    color: #ffffff;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+form .form-footer a:hover {
+    color: #e0e0e0;
+    text-decoration: none;
 }
