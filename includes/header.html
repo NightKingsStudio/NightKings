@@ -1,0 +1,136 @@
+<header>
+    <div class="logo">Night Kings Studio</div>
+    <div class="header_menu_container">
+        <ul class="header_menu">
+            <li class="header_menuItem">
+                <a href="/blade-ball" class="header_menuLink">Blade Ball</a>
+            </li>
+        </ul>
+    </div>
+    <div class="header_account">
+        <button type="button" id="radix-:r0:" aria-haspopup="menu" aria-expanded="false" data-state="closed" class="account-dropdown_trigger">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
+                <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" clip-path="url(#user_svg__a)">
+                    <path d="M6.751 9.75a5.25 5.25 0 1 0 10.5 0 5.25 5.25 0 0 0-10.5 0M18.914 20.876a9.746 9.746 0 0 0-13.826 0"></path>
+                    <path d="M.751 12a11.25 11.25 0 1 0 22.5 0 11.25 11.25 0 0 0-22.5 0"></path>
+                </g>
+                <defs>
+                    <clipPath id="user_svg__a">
+                        <path fill="#fff" d="M.001 0h24v24h-24z"></path>
+                    </clipPath>
+                </defs>
+            </svg>
+            <div class="account-dropdown_displayName">Account</div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="7" fill="none" class="account-dropdown_dropDownIcon">
+                <path fill="currentColor" fill-rule="evenodd" d="M.293 1.294a1 1 0 0 1 1.414 0L5 4.587l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414" clip-rule="evenodd"></path>
+            </svg>
+        </button>
+    </div>    
+    <style>
+        header {
+            background-color: #000000;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+            position: relative; 
+        }
+
+        header .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #ffffff;
+            margin-right: 40px; 
+        }
+
+        .header_menu_container {
+            flex-grow: 1; 
+        }
+
+        .header_menu {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            justify-content: flex-start; 
+        }
+
+        .header_menuItem {
+            margin-right: 20px; 
+        }
+
+        .header_menuLink {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .header_menuLink:hover {
+            color: #5b00d3;
+        }
+
+        .header_account {
+            display: flex;
+            align-items: center;
+        }
+
+        .account-dropdown_trigger {
+            background: none;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-size: 1em;
+        }
+
+        .account-dropdown_displayName {
+            margin-left: 10px;
+            font-size: 1em;
+        }
+
+        .account-dropdown_dropDownIcon {
+            margin-left: 10px;
+        }
+
+        .header_account {
+            position: relative; 
+        }
+
+        .header_account .account-dropdown_trigger {
+            background: transparent; 
+            border: none;
+            color: #ffffff; 
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 10px; 
+            transition: color 0.3s; 
+        }
+
+        .header_account .account-dropdown_trigger svg {
+            stroke: #ffffff; 
+            transition: stroke 0.3s;
+        }
+
+        .header_account .account-dropdown_trigger:hover {
+            color: #5b00d3; 
+        }
+
+        .header_account .account-dropdown_trigger:hover svg {
+            stroke: #5b00d3; 
+        }
+
+        .header_account::after {
+            content: '';
+            position: absolute;
+            bottom: -20px; 
+            left: 0;
+            width: 100%;
+            height: 2px; 
+            background-color: #5b00d3; 
+        }
+
+    </style>
+</header>

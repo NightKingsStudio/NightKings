@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Profile Settings</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Night Kings Studio</div>
+    </header>
+
+    <section class="settings-section">
+        <div class="settings-container">
+            <h2>Profile Settings</h2>
+            <form id="profile-settings-form">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="random-number">Random Number</label>
+                <input type="text" id="random-number" name="random-number" disabled>
+
+                <input type="submit" value="Save Changes">
+            </form>
+            <div class="form-footer">
+                <a href="index.html" class="btn">Back to Home</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Night Kings Studio. All rights reserved.</p>
+    </footer>
+
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js"></script>
+    <!-- Firebase Authentication -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js"></script>
+    <!-- Firebase Firestore -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCJF2ziaPmIDnQF1sB9fx1uScw7JmRuZZU",
+            authDomain: "nightkingsweb.firebaseapp.com",
+            projectId: "nightkingsweb",
+            storageBucket: "nightkingsweb.appspot.com",
+            messagingSenderId: "100491352939",
+            appId: "1:100491352939:web:880d2a1754b502ce83ca2e",
+            measurementId: "G-FKZMTZX97S"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const firestore = getFirestore(app);
+
+        // Function to load user profile
+        async function loadUserProfile(user) {
+            if (!user) {
+                alert('User not logged in. Redirecting to login page.');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            try {
+                const docRef = doc(firestore, 'users', user.uid);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const userData = docSnap.data();
+                    document.getElementById('username').value = userData.username;
+                    document.getElementById('random-number').value = userData.randomNumber;
+                } else {
+                    console.error('No such document!');
+                    alert('Error loading user data.');
+                }
+            } catch (error) {
+                console.error('Error getting user data:', error.message);
+                alert('Error getting user data: ' + error.message);
+            }
+        }
+
+        // Function to save user profile
+        async function saveUserProfile(event) {
+            event.preventDefault();
+
+            const newUsername = document.getElementById('username').value;
+            const user = auth.currentUser;
+
+            if (!user) {
+                alert('User not logged in. Redirecting to login page.');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            try {
+                const docRef = doc(firestore, 'users', user.uid);
+                await updateDoc(docRef, { username: newUsername });
+                alert('Profile updated successfully!');
+            } catch (error) {
+                console.error('Error updating profile:', error.message);
+                alert('Error updating profile: ' + error.message);
+            }
+        }
+
+        // Listen for auth state changes
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                loadUserProfile(user);
+                document.getElementById('profile-settings-form').addEventListener('submit', saveUserProfile);
+            } else {
+                alert('User not logged in. Redirecting to login page.');
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</body>
+</html>

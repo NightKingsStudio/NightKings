@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sign Up - Night Kings Studio</title>
+    <title>Sign Up</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -13,6 +13,15 @@
     </header>
 
     <section>
+        <!-- Background Video -->
+        <div class="overlay"></div>
+        <video autoplay muted loop id="background-video">
+            <source src="https://videos.teamtailor-cdn.com/tt-videos-production/uploads_converted/cover_large/fce5799b1ed7247b35d9f673bf3ea19b17e49a23.mp4" type="video/mp4">
+            <source src="https://videos.teamtailor-cdn.com/tt-videos-production/uploads_converted/cover_large/fce5799b1ed7247b35d9f673bf3ea19b17e49a23.webm" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+
+        <!-- Signup Form -->
         <form id="signup-form">
             <h2>Sign Up</h2>
             <label for="username">Username</label>
@@ -38,5 +47,74 @@
     <footer>
         <p>&copy; 2024 Night Kings Studio. All rights reserved.</p>
     </footer>
+
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js"></script>
+    <!-- Firebase Authentication -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js"></script>
+    <!-- Firebase Firestore -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCJF2ziaPmIDnQF1sB9fx1uScw7JmRuZZU",
+            authDomain: "nightkingsweb.firebaseapp.com",
+            projectId: "nightkingsweb",
+            storageBucket: "nightkingsweb.appspot.com",
+            messagingSenderId: "100491352939",
+            appId: "1:100491352939:web:880d2a1754b502ce83ca2e",
+            measurementId: "G-FKZMTZX97S"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const firestore = getFirestore(app);
+
+        // Handle signup
+        document.getElementById('signup-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match");
+                return;
+            }
+
+            try {
+                // Create user with email and password
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // Generate a random number between 1000 and 9999
+                const randomNumber = Math.floor(1000 + Math.random() * 9000);
+
+                // Save user details to Firestore
+                await setDoc(doc(firestore, 'users', user.uid), {
+                    username: username,
+                    email: email,
+                    UserUID: user.uid, // Save the Firebase UserUID
+                    randomNumber: randomNumber, // Separate field for the random number
+                    ban: false // Default value for ban
+                });
+
+                alert('Signup successful!');
+                window.location.href = 'profile-settings.html'; // Redirect to profile settings
+
+            } catch (error) {
+                console.error("Error signing up:", error.message);
+                alert('Error signing up: ' + error.message);
+            }
+        });
+    </script>
 </body>
 </html>

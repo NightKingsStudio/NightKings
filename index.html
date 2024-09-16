@@ -8,28 +8,30 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <div class="logo">Night Kings Studio</div>
-    </header>
+    <div id="header-placeholder"></div> <!-- Updated ID for header -->
 
-<section id="hero" class="hero-section">
-    <div class="hero-content">
-        <div class="text-container">
-            <h1>Join Us</h1>
-            <div class="button-group">
-                <a href="https://discord.gg/jVqEMPyGJ9" class="btn" target="_blank" rel="noopener noreferrer">Discord</a>
+    <section id="hero" class="hero-section">
+        <div class="hero-content">
+            <div class="text-container">
+                <h1>Join Us</h1>
+                <div class="button-group">
+                    <a href="https://discord.gg/jVqEMPyGJ9" class="btn" target="_blank" rel="noopener noreferrer">
+                        <!-- Discord SVG icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" role="img" class="social-media-links_icon__NOMXk" width="20" height="20">
+                            <path fill="currentColor" d="M18.39 6.183a.05.05 0 0 0-.023-.022A15.2 15.2 0 0 0 14.628 5a.06.06 0 0 0-.06.028q-.257.466-.466.957a14 14 0 0 0-4.2 0 10 10 0 0 0-.473-.957.06.06 0 0 0-.06-.028c-1.292.223-2.55.612-3.74 1.16a.05.05 0 0 0-.026.02c-2.382 3.56-3.035 7.028-2.715 10.456a.06.06 0 0 0 .024.043A15.2 15.2 0 0 0 7.5 18.998a.06.06 0 0 0 .064-.021q.533-.724.94-1.526a.06.06 0 0 0-.012-.068.1.1 0 0 0-.02-.013q-.745-.285-1.434-.683a.06.06 0 0 1-.024-.075.1.1 0 0 1 .018-.022 8 8 0 0 0 .285-.223.06.06 0 0 1 .059-.008c3.007 1.372 6.263 1.372 9.234 0a.06.06 0 0 1 .06.007q.14.115.286.224a.06.06 0 0 1 .024.05.06.06 0 0 1-.03.047 9.4 9.4 0 0 1-1.433.683.06.06 0 0 0-.038.058.1.1 0 0 0 .007.023q.412.796.937 1.525a.06.06 0 0 0 .065.022 15.2 15.2 0 0 0 4.596-2.319.06.06 0 0 0 .024-.042c.383-3.961-.642-7.402-2.717-10.453M8.954 14.55c-.905 0-1.651-.83-1.651-1.851s.732-1.852 1.651-1.852c.927 0 1.666.838 1.651 1.851 0 .993-.732 1.852-1.65 1.852m6.106 0c-.905 0-1.65-.83-1.65-1.851s.728-1.852 1.65-1.852c.928 0 1.666.838 1.652 1.851-.002.993-.727 1.852-1.652 1.852"></path>
+                        </svg>
+                        Discord
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="overlay"></div>
-    <video autoplay muted loop id="background-video">
-        <source src="https://videos.teamtailor-cdn.com/tt-videos-production/uploads_converted/cover_large/fce5799b1ed7247b35d9f673bf3ea19b17e49a23.mp4" type="video/mp4">
-        <source src="https://videos.teamtailor-cdn.com/tt-videos-production/uploads_converted/cover_large/fce5799b1ed7247b35d9f673bf3ea19b17e49a23.webm" type="video/webm">
-        Your browser does not support the video tag.
-    </video>
-</section>
-
-    
+        <div class="overlay"></div>
+        <video autoplay muted loop id="background-video">
+            <source src="https://videos.teamtailor-cdn.com/tt-videos-production/uploads_converted/cover_large/fce5799b1ed7247b35d9f673bf3ea19b17e49a23.mp4" type="video/mp4">
+            <source src="https://videos.teamtailor-cdn.com/tt-videos-production/uploads_converted/cover_large/fce5799b1ed7247b35d9f673bf3ea19b17e49a23.webm" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+    </section>
 
     <section id="about">
         <h2>About Night Kings Studio</h2>
@@ -38,17 +40,49 @@
 
     <section id="game">
         <div class="game-info">
-            <img src="" alt="Blade Rush">
+            <img src="path/to/blade-rush-image.jpg" alt="Blade Rush"> <!-- Replace with actual image path -->
             <div class="game-description">
                 <h3>Blade Rush</h3>
-                <p>Step into the darkness in our latest game, The Shadow Realm, a narrative-driven RPG where players must navigate through a world filled with mystery, danger, and untold secrets. Unveil the hidden truths and conquer the shadows.</p>
-                <a href="" class="btn">Learn More</a>
+                <p>Step into the darkness in our latest game, Blade Rush, a narrative-driven RPG where players must navigate through a world filled with mystery, danger, and untold secrets. Unveil the hidden truths and conquer the shadows.</p>
+                <a href="path/to/game-details" class="btn">Learn More</a> <!-- Replace with actual URL or path -->
             </div>
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2024 Night Kings Studio. All rights reserved.</p>
-    </footer>
+    <div id="footer-placeholder"></div> <!-- Updated ID for footer -->
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-analytics.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCJF2ziaPmIDnQF1sB9fx1uScw7JmRuZZU",
+            authDomain: "nightkingsweb.firebaseapp.com",
+            projectId: "nightkingsweb",
+            storageBucket: "nightkingsweb.appspot.com",
+            messagingSenderId: "100491352939",
+            appId: "1:100491352939:web:880d2a1754b502ce83ca2e",
+            measurementId: "G-FKZMTZX97S"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app); // Correctly initialize analytics
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function loadHTML(url, elementId) {
+                fetch(url)
+                    .then(response => response.text())
+                    .then(data => document.getElementById(elementId).innerHTML = data)
+                    .catch(error => console.error('Error loading HTML:', error));
+            }
+
+            loadHTML('includes/header.html', 'header-placeholder');
+            loadHTML('includes/footer.html', 'footer-placeholder');
+        });
+    </script>
 </body>
 </html>

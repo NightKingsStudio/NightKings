@@ -12,41 +12,6 @@ body {
     line-height: 1.6;
 }
 
-header {
-    background-color: #000000;
-    padding: 20px;
-    display: flex;
-    justify-content: center; /* Center the logo horizontally */
-    align-items: center;
-    position: relative; /* Needed for absolute positioning of elements if required */
-}
-
-header .logo {
-    font-size: 1.8em;
-    font-weight: bold;
-    color: #ffffff;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-}
-
-nav ul li {
-    margin-left: 20px;
-}
-
-nav ul li a {
-    color: #e0e0e0;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-
-nav ul li a:hover {
-    color: #111111;
-}
-
 /* Hero Section Styles */
 #hero {
     position: relative;
@@ -99,7 +64,7 @@ nav ul li a:hover {
 }
 
 .btn:hover {
-    background-color: #111111; 
+    background-color: #5b00d3; 
     transform: scale(1.05); 
 }
 
@@ -240,13 +205,14 @@ footer {
 }
 
 /* Login & Signup Page Styles */
+
 form {
     background-color: #1a1a1a;
     padding: 40px;
     max-width: 400px;
     margin: 100px auto;
-    border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+    border-radius: 0; /* Removes rounded corners */
 }
 
 form h2 {
@@ -270,8 +236,8 @@ form input {
     border: none;
     background-color: #2b2b2b;
     color: #ffffff;
-    border-radius: 5px;
     font-size: 1em;
+    border-radius: 0; /* Removes rounded corners from input fields */
 }
 
 form input[type="submit"] {
@@ -281,6 +247,7 @@ form input[type="submit"] {
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
     padding: 15px;
+    border-radius: 0; /* Removes rounded corners from the submit button */
 }
 
 form input[type="submit"]:hover {
@@ -302,4 +269,261 @@ form .form-footer a {
 form .form-footer a:hover {
     color: #e0e0e0;
     text-decoration: none;
+}
+
+/* Background Video and Overlay */
+#background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Darkens the video */
+    z-index: 0;
+}
+
+section {
+    position: relative;
+    z-index: 1; /* Ensures the form appears above the overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Adjust form positioning for the video background */
+form {
+    background-color: rgba(26, 26, 26, 0.9); /* Slightly transparent */
+    padding: 40px;
+    max-width: 400px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+    z-index: 1;
+}
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+    background-color: #121212;
+}
+
+header {
+    background-color: #1f1f1f;
+    padding: 20px;
+    text-align: center;
+    color: #b3b3b3;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+footer {
+    background-color: #1f1f1f;
+    padding: 20px;
+    text-align: center;
+    color: #b3b3b3;
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Settings Page Styles */
+.settings-section {
+    padding: 40px 20px;
+    background-color: #1a1a1a;
+    min-height: calc(100vh - 120px); /* Adjust height to fit between header and footer */
+}
+
+.settings-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #2b2b2b;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+}
+
+.settings-container h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.settings-container label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    color: #ffffff;
+}
+
+.settings-container input[type="text"],
+.settings-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    background-color: #2b2b2b;
+    color: #ffffff;
+    font-size: 1em;
+    border-radius: 4px;
+}
+
+.settings-container input[type="submit"] {
+    background-color: #000000;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    padding: 15px;
+    border: none;
+    border-radius: 4px;
+}
+
+.settings-container input[type="submit"]:hover {
+    background-color: #111111;
+    transform: scale(1.05);
+}
+
+.settings-container .form-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.settings-container .form-footer .btn {
+    background-color: #000000;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.settings-container .form-footer .btn:hover {
+    background-color: #111111;
+}
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #000000;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    background-color: #1f1f1f;
+    padding: 20px;
+    text-align: center;
+    color: #ffffff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+header .logo {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+/* Footer */
+footer {
+    background-color: #1f1f1f;
+    padding: 20px;
+    text-align: center;
+    color: #b3b3b3;
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Settings Page Styles */
+.settings-section {
+    padding: 40px 20px;
+    background-color: #1a1a1a;
+    min-height: calc(100vh - 120px); /* Adjust height to fit between header and footer */
+}
+
+.settings-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #2b2b2b;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+}
+
+.settings-container h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.settings-container label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    color: #ffffff;
+}
+
+.settings-container input[type="text"],
+.settings-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    background-color: #2b2b2b;
+    color: #ffffff;
+    font-size: 1em;
+    border-radius: 4px;
+}
+
+.settings-container input[type="submit"] {
+    background-color: #000000;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    padding: 15px;
+    border: none;
+    border-radius: 4px;
+}
+
+.settings-container input[type="submit"]:hover {
+    background-color: #111111;
+    transform: scale(1.05);
+}
+
+.settings-container .form-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.settings-container .form-footer .btn {
+    background-color: #000000;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.settings-container .form-footer .btn:hover {
+    background-color: #111111;
 }
