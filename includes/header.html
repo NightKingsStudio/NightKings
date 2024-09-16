@@ -1,31 +1,11 @@
-<header>
-    <div class="logo">Night Kings Studio</div>
-    <div class="header_menu_container">
-        <ul class="header_menu">
-            <li class="header_menuItem">
-                <a href="/blade-ball" class="header_menuLink">Blade Ball</a>
-            </li>
-        </ul>
-    </div>
-    <div class="header_account">
-        <button type="button" id="radix-:r0:" aria-haspopup="menu" aria-expanded="false" data-state="closed" class="account-dropdown_trigger">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
-                <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" clip-path="url(#user_svg__a)">
-                    <path d="M6.751 9.75a5.25 5.25 0 1 0 10.5 0 5.25 5.25 0 0 0-10.5 0M18.914 20.876a9.746 9.746 0 0 0-13.826 0"></path>
-                    <path d="M.751 12a11.25 11.25 0 1 0 22.5 0 11.25 11.25 0 0 0-22.5 0"></path>
-                </g>
-                <defs>
-                    <clipPath id="user_svg__a">
-                        <path fill="#fff" d="M.001 0h24v24h-24z"></path>
-                    </clipPath>
-                </defs>
-            </svg>
-            <div class="account-dropdown_displayName">Account</div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="7" fill="none" class="account-dropdown_dropDownIcon">
-                <path fill="currentColor" fill-rule="evenodd" d="M.293 1.294a1 1 0 0 1 1.414 0L5 4.587l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414" clip-rule="evenodd"></path>
-            </svg>
-        </button>
-    </div>    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Night Kings Studio</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
         header {
             background-color: #000000;
@@ -36,15 +16,24 @@
             position: relative; 
         }
 
-        header .logo {
+        .logo {
+            display: flex;
+            align-items: center;
+            color: #ffffff;
             font-size: 1.8em;
             font-weight: bold;
-            color: #ffffff;
-            margin-right: 40px; 
+        }
+
+        .logo-image {
+            height: 40px; 
+            margin-right: 10px; 
         }
 
         .header_menu_container {
             flex-grow: 1; 
+            display: flex;
+            justify-content: flex-start; 
+            margin-left: 25px;
         }
 
         .header_menu {
@@ -52,11 +41,10 @@
             display: flex;
             margin: 0;
             padding: 0;
-            justify-content: flex-start; 
         }
 
         .header_menuItem {
-            margin-right: 20px; 
+            margin-right: 40px; 
         }
 
         .header_menuLink {
@@ -73,6 +61,7 @@
         .header_account {
             display: flex;
             align-items: center;
+            position: relative;
         }
 
         .account-dropdown_trigger {
@@ -83,6 +72,8 @@
             display: flex;
             align-items: center;
             font-size: 1em;
+            padding: 10px;
+            transition: color 0.3s; 
         }
 
         .account-dropdown_displayName {
@@ -92,10 +83,6 @@
 
         .account-dropdown_dropDownIcon {
             margin-left: 10px;
-        }
-
-        .header_account {
-            position: relative; 
         }
 
         .header_account .account-dropdown_trigger {
@@ -128,9 +115,43 @@
             bottom: -20px; 
             left: 0;
             width: 100%;
-            height: 2px; 
+            height: 3px; 
             background-color: #5b00d3; 
         }
-
     </style>
-</header>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="/images/Logo.svg" alt="Night Kings Studio Logo" class="logo-image">
+            <span class="logo-text">Night Kings Studio</span>
+        </div>
+        <div class="header_menu_container">
+            <ul class="header_menu">
+                <li class="header_menuItem">
+                    <a href="/" class="header_menuLink">Blade Rush</a>
+                </li>
+            </ul>
+        </div>
+        <div class="header_account">
+            <button type="button" id="radix-:r0:" aria-haspopup="menu" aria-expanded="false" data-state="closed" class="account-dropdown_trigger">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
+                    <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" clip-path="url(#user_svg__a)">
+                        <path d="M6.751 9.75a5.25 5.25 0 1 0 10.5 0 5.25 5.25 0 0 0-10.5 0M18.914 20.876a9.746 9.746 0 0 0-13.826 0"></path>
+                        <path d="M.751 12a11.25 11.25 0 1 0 22.5 0 11.25 11.25 0 0 0-22.5 0"></path>
+                    </g>
+                    <defs>
+                        <clipPath id="user_svg__a">
+                            <path fill="#fff" d="M.001 0h24v24h-24z"></path>
+                        </clipPath>
+                    </defs>
+                </svg>
+                <div class="account-dropdown_displayName">Account</div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="7" fill="none" class="account-dropdown_dropDownIcon">
+                    <path fill="currentColor" fill-rule="evenodd" d="M.293 1.294a1 1 0 0 1 1.414 0L5 4.587l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414" clip-rule="evenodd"></path>
+                </svg>
+            </button>
+        </div>    
+    </header>
+</body>
+</html>
