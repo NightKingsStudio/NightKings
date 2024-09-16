@@ -527,3 +527,15 @@ footer {
 .settings-container .form-footer .btn:hover {
     background-color: #111111;
 }
+
+body {
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #fff;
+    background-color: #000;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
