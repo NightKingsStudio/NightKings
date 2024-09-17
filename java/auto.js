@@ -6,6 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Error loading HTML:', error));
     }
 
-    loadHTML('includes/header.html', 'header-placeholder');
-    loadHTML('includes/footer.html', 'footer-placeholder');
+    loadHTML('NightKings/includes/header.html', 'header-placeholder');
+    loadHTML('NightKings/includes/footer.html', 'footer-placeholder');
 });
