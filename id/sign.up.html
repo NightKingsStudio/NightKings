@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign-up</title>
+    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/nightkingsweb.appspot.com/o/Web.png?alt=media&token=85bac74c-03b3-427a-9131-f50aa2a3f48d" type="image/png">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <main class="main">
+        <div class="overlay"></div>
+        <video autoplay muted loop id="background-video">
+            <source src="https://videos.teamtailor-cdn.com/tt-videos-production/uploads_converted/cover_large/fce5799b1ed7247b35d9f673bf3ea19b17e49a23.mp4" type="video/mp4">
+            <source src="https://videos.teamtailor-cdn.com/tt-videos-production/uploads_converted/cover_large/fce5799b1ed7247b35d9f673bf3ea19b17e49a23.webm" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+
+        <section class="page-container">
+            <!-- Sign Up Form -->
+            <div class="sign-up-form-container">
+                <h2 class="sign-up-title">Sign Up</h2>
+                <form class="sign-up-form" id="sign-up-form">
+                    <div class="input-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                        <span id="username-error" class="error-message"></span>
+                    </div>
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        <span id="email-error" class="error-message"></span>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="sign-up-button">Sign Up</button>
+                </form>
+                <div class="sign-in-text">
+                    <a href="/sign-in.html" class="sign-in-link">Go back</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, button, input, label {
+            font-family: Montserrat, sans-serif;
+        }
+
+        /* Main container */
+        .main {
+            flex: 1 0 auto;
+            display: flex;
+            justify-content: flex-start; /* Align to left */
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            padding-left: 20px; /* Optional padding for space on the left */
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+            z-index: 1;
+        }
+
+        #background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .page-container {
+            display: flex;
+            justify-content: flex-start; /* Align sign-up form to the left */
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+            z-index: 2;
+        }
+
+        /* Sign Up Form Container */
+        .sign-up-form-container {
+            background-color: #000; /* Black background color */
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            color: white; /* White text for contrast */
+            margin-left: 20px; /* Optional margin */
+        }
+
+        /* Sign Up Form Title */
+        .sign-up-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Form styling */
+        .sign-up-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 1rem;
+            font-weight: 500;
+            color: white; /* White label color */
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+            border-color: #5b00d3;
+            outline: none;
+        }
+
+        .sign-up-button {
+            background-color: #5b00d3;
+            color: white;
+            font-size: 1.2rem;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .sign-up-button:hover {
+            background-color: #45009d;
+        }
+
+        /* Sign-in text below the form */
+        .sign-in-text {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.875rem;
+            color: #e5e5e5;
+        }
+
+        .sign-in-link {
+            color: #5b00d3;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .sign-in-link:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.875rem;
+            display: none;
+        }
+    </style>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCJF2ziaPmIDnQF1sB9fx1uScsVX8YrsCw",
+            authDomain: "nightkingsweb.firebaseapp.com",
+            projectId: "nightkingsweb",
+            storageBucket: "nightkingsweb.appspot.com",
+            messagingSenderId: "451754358701",
+            appId: "1:451754358701:web:7158d032068b69b5366d1d"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const database = getDatabase(app);
+
+        const usernameInput = document.getElementById('username');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const signUpForm = document.getElementById('sign-up-form');
+        const usernameError = document.getElementById('username-error');
+        const emailError = document.getElementById('email-error');
+
+        // Function to generate a random 4-digit number
+        function generateRandomNumber() {
+            return Math.floor(1000 + Math.random() * 9000);
+        }
+
+        // Function to validate username
+        function isValidUsername(username) {
+            const minLength = 4;
+            const swearWords = ['niger', 'gay', 'adofhittler', 'neger']; 
+            if (username.length < minLength) {
+                return false;
+            }
+            for (const swear of swearWords) {
+                if (username.toLowerCase().includes(swear)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        signUpForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = usernameInput.value.trim();
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+
+            if (!isValidUsername(username)) {
+                usernameError.textContent = "Invalid username. It must be at least 4 characters long and cannot contain inappropriate words.";
+                usernameError.style.display = 'block';
+                return;
+            }
+
+            usernameError.style.display = 'none';
+
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    const uid = user.uid;
+                    const uniqueUsername = `${username}#${generateRandomNumber()}`;
+                    
+                    // Update user profile with username
+                    updateProfile(user, { displayName: uniqueUsername })
+                        .then(() => {
+                            // Save additional user info to the database
+                            set(ref(database, 'users/' + uid), {
+                                username: uniqueUsername,
+                                email: email,
+                                accountLocked: false
+                            });
+                            console.log('User signed up and data saved:', user);
+                            window.location.href = '/404'; // Redirect to login page
+                        })
+                        .catch((error) => {
+                            console.error('Error updating profile:', error);
+                        });
+                })
+                .catch((error) => {
+                    console.error('Error signing up:', error);
+                    if (error.code === 'auth/email-already-in-use') {
+                        emailError.textContent = 'Email already in use';
+                        emailError.style.display = 'block';
+                    } else {
+                        emailError.textContent = 'Error signing up. Please try again.';
+                        emailError.style.display = 'block';
+                    }
+                });
+        });
+
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function loadHTML(url, elementId) {
+                fetch(url)
+                    .then(response => response.text())
+                    .then(data => document.getElementById(elementId).innerHTML = data)
+                    .catch(error => console.error('Error loading HTML:', error));
+            }
+
+            loadHTML('/includes/header.html', 'header-placeholder');
+            loadHTML('/includes/footer.html', 'footer-placeholder');
+        });
+    </script>
+</body>
+</html>
