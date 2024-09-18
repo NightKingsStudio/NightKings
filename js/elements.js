@@ -15,6 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Error loading HTML:', error));
     }
 
-    loadHTML('inc/header.html', 'header-placeholder');
-    loadHTML('inc/footer.html', 'footer-placeholder');
+    loadHTML('/inc/header.html', 'header-placeholder');
+    loadHTML('/inc/footer.html', 'footer-placeholder');
 });
