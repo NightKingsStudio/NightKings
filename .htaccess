@@ -1,9 +1,0 @@
-# Enable mod_rewrite (required for redirect rules)
-RewriteEngine On
-
-# Redirect root URL to /home
-RewriteCond %{REQUEST_URI} ^/$
-RewriteRule ^$ /NightKings/home [L,R=301]
-
-# Custom 404 page
-ErrorDocument 404 /404.html
