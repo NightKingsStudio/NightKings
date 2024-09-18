@@ -893,13 +893,6 @@ h1, h2, h3, h4, h5, h6, p {
     overflow-wrap: break-word;
 }
 
-h1, h2, h3, h4 {
-    font-family: Montserrat, sans-serif;
-    font-weight: 600;
-    line-height: 1.25;
-    letter-spacing: -.01em;
-}
-
 .sign-in_title {
     font-size: 4rem;
     text-transform: uppercase;
@@ -1020,3 +1013,15 @@ h1, h2, h3, h4 {
     justify-content: center;
     overflow-x: hidden;
 }
+
+.suse-header,  .account-dropdown_displayName, .header_menuLink, .footer-copy-text, .discord_text_button{ 
+    font-family: "Inter", sans-serif;
+    font-weight: 100; /* 100-900 */
+    font-style: normal;
+  }
+  
+  .suse-bold-text, .logo-text, .footer-logo-text{
+     font-family: "Inter", sans-serif;
+    font-weight: 800; /* 100-900 */
+    font-style: normal;
+  }
