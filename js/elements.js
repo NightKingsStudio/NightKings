@@ -11,28 +11,37 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 console.log(`Successfully loaded ${url}`);
                 document.getElementById(elementId).innerHTML = data;
+
+                // After loading header HTML, set up event listeners
+                setupEventListeners();
             })
             .catch(error => console.error('Error loading HTML:', error));
     }
 
     loadHTML('inc/header.html', 'header-placeholder');
     loadHTML('inc/footer.html', 'footer-placeholder');
-});
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Get the buttons by their class names
-    const steamButton = document.querySelector('.sign-in-button');
-    const loginButton = document.querySelector('.sign-in-button1');
+    function setupEventListeners() {
+        console.log("DOM fully loaded and parsed");
 
-    // Add click event listener to the Steam button
-    steamButton.addEventListener('click', function() {
-        // Redirect to Steam login page (or perform other actions)
-        window.location.href = '/NightKings/404';
-    });
+        const accountDropdownButton = document.getElementById('accountDropdown');
+        const dropdownContent = document.getElementById('dropdownContent');
 
-    // Add click event listener to the Login button
-    loginButton.addEventListener('click', function() {
-        // Redirect to login page or another URL
-        window.location.href = 'id/log-in'; 
-    });
+        if (accountDropdownButton && dropdownContent) {
+            accountDropdownButton.addEventListener('click', function() {
+                const isExpanded = accountDropdownButton.getAttribute('aria-expanded') === 'true';
+                accountDropdownButton.setAttribute('aria-expanded', !isExpanded);
+                dropdownContent.style.display = isExpanded ? 'none' : 'block';
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!accountDropdownButton.contains(event.target) && !dropdownContent.contains(event.target)) {
+                    dropdownContent.style.display = 'none';
+                    accountDropdownButton.setAttribute('aria-expanded', 'false');
+                }
+            });
+        } else {
+            console.error('Dropdown elements not found');
+        }
+    }
 });

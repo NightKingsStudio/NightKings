@@ -15,3 +15,5 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/fireba
             // Initialize Firebase
             const app = initializeApp(firebaseConfig);
             const analytics = getAnalytics(app); // Correctly initialize analytics
+
+            

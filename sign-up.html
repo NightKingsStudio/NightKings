@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign-up</title>
+    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/nightkingsweb.appspot.com/o/Web.png?alt=media&token=85bac74c-03b3-427a-9131-f50aa2a3f48d" type="image/png">
+    <link rel="stylesheet" href="style/styles.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch("/inc/header.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("header-placeholder").innerHTML = data;
+                })
+                .catch(error => console.error('Error loading header:', error));
+        });
+    </script>
+    <script src="js/elements.js" defer></script>
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <main class="main">
+        <div class="overlay"></div>
+        <video autoplay muted loop id="background-video">
+            <source src="https://videos.teamtailor-cdn.com/tt-videos-production/uploads_converted/cover_large/fce5799b1ed7247b35d9f673bf3ea19b17e49a23.mp4" type="video/mp4">
+            <source src="https://videos.teamtailor-cdn.com/tt-videos-production/uploads_converted/cover_large/fce5799b1ed7247b35d9f673bf3ea19b17e49a23.webm" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+
+        <section class="page-container">
+            <!-- Sign Up Form -->
+            <div class="sign-up-form-container">
+                <h2 class="sign-up-title">Sign Up</h2>
+                <form class="sign-up-form" id="sign-up-form">
+                    <div class="input-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                        <span id="username-error" class="error-message"></span>
+                    </div>
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        <span id="email-error" class="error-message"></span>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="sign-up-button">Sign Up</button>
+                </form>
+                <div class="sign-in-text">
+                    <a href="sign-in" class="sign-in-link">Go back</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCJF2ziaPmIDnQF1sB9fx1uScw7JmRuZZU",
+            authDomain: "nightkingsweb.firebaseapp.com",
+            projectId: "nightkingsweb",
+            storageBucket: "nightkingsweb.appspot.com",
+            messagingSenderId: "451754358701",
+            appId: "1:451754358701:web:7158d032068b69b5366d1d"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const database = getDatabase(app);
+
+        const usernameInput = document.getElementById('username');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const signUpForm = document.getElementById('sign-up-form');
+        const usernameError = document.getElementById('username-error');
+        const emailError = document.getElementById('email-error');
+
+        // Function to generate a random 4-digit number
+        function generateRandomNumber() {
+            return Math.floor(1000 + Math.random() * 9000);
+        }
+
+        // Function to validate username
+        function isValidUsername(username) {
+            const minLength = 4;
+            const swearWords = ['niger', 'gay', 'adofhittler', 'neger'];
+            if (username.length < minLength) {
+                return false;
+            }
+            for (const swear of swearWords) {
+                if (username.toLowerCase().includes(swear)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        signUpForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = usernameInput.value.trim();
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+
+            if (!isValidUsername(username)) {
+                usernameError.textContent = "Invalid username. It must be at least 4 characters long and cannot contain inappropriate words.";
+                usernameError.style.display = 'block';
+                return;
+            }
+
+            usernameError.style.display = 'none';
+
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    const uid = user.uid;
+                    const uniqueUsername = `${username}#${generateRandomNumber()}`;
+
+                    // Update user profile with username
+                    updateProfile(user, { displayName: uniqueUsername })
+                        .then(() => {
+                            // Save additional user info to the database
+                            set(ref(database, 'users/' + uid), {
+                                username: uniqueUsername,
+                                email: email,
+                                accountLocked: false
+                            });
+                            console.log('User signed up and data saved:', user);
+                            window.location.href = '/404'; 
+                        })
+                        .catch((error) => {
+                            console.error('Error updating profile:', error);
+                        });
+                })
+                .catch((error) => {
+                    console.error('Error signing up:', error);
+                    if (error.code === 'auth/email-already-in-use') {
+                        emailError.textContent = 'Email already in use';
+                        emailError.style.display = 'block';
+                    } else {
+                        emailError.textContent = 'Error signing up. Please try again.';
+                        emailError.style.display = 'block';
+                    }
+                });
+        });
+
+    </script>
+</body>
+</html>

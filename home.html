@@ -11,6 +11,16 @@
     <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/nightkingsweb.appspot.com/o/Web.png?alt=media&token=85bac74c-03b3-427a-9131-f50aa2a3f48d" type="image/png">
     <link rel="stylesheet" href="style/styles.css">
     <script src="js/elements.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch("inc/header.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("header-placeholder").innerHTML = data;
+                })
+                .catch(error => console.error('Error loading header:', error));
+        });
+    </script>
     <script src="js/auth.js" type="module" defer></script>
 </head>
 

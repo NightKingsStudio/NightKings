@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Log-in</title>
+    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/nightkingsweb.appspot.com/o/Web.png?alt=media&token=85bac74c-03b3-427a-9131-f50aa2a3f48d" type="image/png">
+    <link rel="stylesheet" href="style/styles.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch("inc/header.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("header-placeholder").innerHTML = data;
+                })
+                .catch(error => console.error('Error loading header:', error));
+        });
+    </script>
+    <script src="js/elements.js" defer></script>
+    <!-- Firebase Scripts (using the modular approach) -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js';
+        import { getAuth, fetchSignInMethodsForEmail, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCJF2ziaPmIDnQF1sB9fx1uScw7JmRuZZU",
+            authDomain: "nightkingsweb.firebaseapp.com",
+            projectId: "nightkingsweb",
+            storageBucket: "nightkingsweb.appspot.com",
+            messagingSenderId: "100491352939",
+            appId: "1:100491352939:web:880d2a1754b502ce83ca2e",
+            measurementId: "G-FKZMTZX97S"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const emailInput = document.getElementById('email');
+            const passwordGroup = document.querySelector('.password-group');
+            const submitButton = document.querySelector('.login-button');
+            const emailError = document.getElementById('email-error');
+
+            // Check email
+            emailInput.addEventListener('blur', function() {
+                const email = emailInput.value;
+                console.log('Checking email:', email);
+                if (email) {
+                    fetchSignInMethodsForEmail(auth, email)
+                        .then(function(signInMethods) {
+                            console.log('Sign-in methods:', signInMethods);
+                            if (signInMethods.length > 0) {
+                                passwordGroup.style.display = 'block';
+                                submitButton.disabled = false;
+                                emailError.style.display = 'none';
+                            } else {
+                                emailError.textContent = "Email not found";
+                                emailError.style.display = 'block';
+                                passwordGroup.style.display = 'none';
+                                submitButton.disabled = true;
+                            }
+                        })
+                        .catch(function(error) {
+                            console.error("Error checking email:", error);
+                            emailError.textContent = "Error checking email";
+                            emailError.style.display = 'block';
+                            passwordGroup.style.display = 'none';
+                            submitButton.disabled = true;
+                        });
+                } else {
+                    emailError.textContent = "Please enter an email";
+                    emailError.style.display = 'block';
+                    passwordGroup.style.display = 'none';
+                    submitButton.disabled = true;
+                }
+            });
+
+            // Login form submission
+            const loginForm = document.getElementById('login-form');
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = emailInput.value;
+                const password = document.getElementById('password').value;
+
+                signInWithEmailAndPassword(auth, email, password)
+                    .then(function(userCredential) {
+                        const user = userCredential.user;
+                        console.log('Logged in:', user);
+                    })
+                    .catch(function(error) {
+                        console.error("Login error:", error);
+                        emailError.textContent = "Login error. Please check your email and password.";
+                        emailError.style.display = 'block';
+                    });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <main class="main">
+        <div class="overlay"></div>
+        <video autoplay muted loop id="background-video">
+            <source src="https://videos.teamtailor-cdn.com/tt-videos-production/uploads_converted/cover_large/fce5799b1ed7247b35d9f673bf3ea19b17e49a23.mp4" type="video/mp4">
+            <source src="https://videos.teamtailor-cdn.com/tt-videos-production/uploads_converted/cover_large/fce5799b1ed7247b35d9f673bf3ea19b17e49a23.webm" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+
+        <section class="page-container">
+            <!-- Login Form -->
+            <div class="login-form-container">
+                <h2 class="login-title">Login</h2>
+                <form class="login-form" id="login-form">
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        <span id="email-error" class="error-message" style="display: none;"></span>
+                    </div>
+                    <div class="input-group password-group" style="display: none;">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="login-button" disabled>Log In</button>
+                </form>
+                <div class="sign-up-text">
+                    <a href="/sign-in" class="sign-up-link">Go back</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div id="footer-placeholder"></div>
+</body>
+</html>
