@@ -7,7 +7,8 @@
     <title src="">Night Kings Studio</title>
     <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/nightkingsweb.appspot.com/o/Web.png?alt=media&token=85bac74c-03b3-427a-9131-f50aa2a3f48d" type="image/png">
     <link rel="stylesheet" href="style/styles.css">
-    <script src="/js/elements.js" defer></script>
+    <script src="js/elements.js" defer></script>
+    <script src="js/auth.js" type="module" defer></script>
 </head>
 
 <body class="body">
@@ -54,25 +55,6 @@
 
         <div id="footer-placeholder"></div>
 
-        <script type="module">
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
-            import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
-            import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-analytics.js";
-
-            const firebaseConfig = {
-                apiKey: "AIzaSyCJF2ziaPmIDnQF1sB9fx1uScw7JmRuZZU",
-                authDomain: "nightkingsweb.firebaseapp.com",
-                projectId: "nightkingsweb",
-                storageBucket: "nightkingsweb.appspot.com",
-                messagingSenderId: "100491352939",
-                appId: "1:100491352939:web:880d2a1754b502ce83ca2e",
-                measurementId: "G-FKZMTZX97S"
-            };
-
-            // Initialize Firebase
-            const app = initializeApp(firebaseConfig);
-            const analytics = getAnalytics(app); // Correctly initialize analytics
-        </script>
     </div>
 </body>
 </html>
