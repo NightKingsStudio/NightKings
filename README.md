@@ -1,4 +1,4 @@
-# Night Kings Studio (https://nightkingsstudio.github.io/NightKings/)
+# Night Kings Studio
 
 The webside have all right deserved ! 
 
