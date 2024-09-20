@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style/styles.css">
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            fetch("/inc/header.html")
+            fetch("inc/header.html")
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById("header-placeholder").innerHTML = data;
@@ -24,36 +24,67 @@
     <div id="header-placeholder"></div>
 
     <main class="main">
-        <div class="overlay"></div>
+        <!-- Diagonal overlay -->
+        <div class="diagonal-overlay"></div>
+
         <video autoplay muted loop id="background-video">
             <source src="https://videos.teamtailor-cdn.com/tt-videos-production/uploads_converted/cover_large/fce5799b1ed7247b35d9f673bf3ea19b17e49a23.mp4" type="video/mp4">
             <source src="https://videos.teamtailor-cdn.com/tt-videos-production/uploads_converted/cover_large/fce5799b1ed7247b35d9f673bf3ea19b17e49a23.webm" type="video/webm">
             Your browser does not support the video tag.
         </video>
 
-        <section class="page-container">
+        <section class="page-container">    
             <!-- Sign Up Form -->
             <div class="sign-up-form-container">
-                <h2 class="sign-up-title">Sign Up</h2>
+                <h2 class="sign-up-title">Create Account</h2>
                 <form class="sign-up-form" id="sign-up-form">
+                    <!-- Country Selection -->
                     <div class="input-group">
-                        <label for="username">Username</label>
-                        <input type="text" id="username" name="username" placeholder="Enter your username" required>
-                        <span id="username-error" class="error-message"></span>
+                        <select id="country" name="country" required>
+                            <option value="" disabled selected>Select your country</option>
+                            <option value="United States">United States</option>
+                            <option value="Sweden">Sweden</option>
+                        </select>
                     </div>
+
+                    <!-- Email -->
                     <div class="input-group">
-                        <label for="email">Email</label>
                         <input type="email" id="email" name="email" placeholder="Enter your email" required>
                         <span id="email-error" class="error-message"></span>
                     </div>
+
+                    <!-- First Name -->
                     <div class="input-group">
-                        <label for="password">Password</label>
+                        <input type="text" id="first-name" name="first-name" placeholder="Enter your first name" required>
+                    </div>
+
+                    <!-- Last Name -->
+                    <div class="input-group">
+                        <input type="text" id="last-name" name="last-name" placeholder="Enter your last name" required>
+                    </div>
+
+                    <!-- Display Name -->
+                    <div class="input-group">
+                        <input type="text" id="username" name="username" placeholder="Enter your display name" required>
+                        <span id="username-error" class="error-message"></span>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="input-group">
                         <input type="password" id="password" name="password" placeholder="Enter your password" required>
                     </div>
-                    <button type="submit" class="sign-up-button">Sign Up</button>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">I have read and agree to the <a href="">terms of service</a></label>
+                    </div>
+
+                    <!-- Sign Up Button -->
+                    <button type="submit" class="sign-up-button">Continue</button>
                 </form>
+
                 <div class="sign-in-text">
-                    <a href="sign-in" class="sign-in-link">Go back</a>
+                    <a href="sign-in" class="sign-in-link">Already have an account? Sign in</a>
                 </div>
             </div>
         </section>
@@ -61,102 +92,140 @@
 
     <div id="footer-placeholder"></div>
 
-    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js"></script>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
-        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
+    <style>
+        
+        /* Set the background of the whole page to black */
+body {
+    background-color: black;
+}
 
+/* Page container */
+.page-container {
+    background-color: black;
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    z-index: 2;
+}
+
+/* Ensure the form and content are still on top of the overlay */
+.sign-up-form-container {
+    position: relative;
+    z-index: 3; /* Above the overlay */
+}
+
+/* Ensure the header has a black background */
+#header-placeholder {
+    background-color: black;
+    z-index: 3; /* Keep it above the overlay */
+}
+
+/* Background video */
+#background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+/* Adjust the diagonal black overlay to cover more of the screen */
+.diagonal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(60deg, black 20%, transparent 20%);
+    z-index: 2; /* Above the video but below the form */
+}
+
+/* Ensure the overlay remains semi-transparent if needed */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    z-index: 1;
+}
+
+
+    </style>
+
+    <!-- Firebase scripts (non-modular CDN version) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script>
+        // Your Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyCJF2ziaPmIDnQF1sB9fx1uScw7JmRuZZU",
             authDomain: "nightkingsweb.firebaseapp.com",
             projectId: "nightkingsweb",
             storageBucket: "nightkingsweb.appspot.com",
-            messagingSenderId: "451754358701",
-            appId: "1:451754358701:web:7158d032068b69b5366d1d"
+            messagingSenderId: "100491352939",
+            appId: "1:100491352939:web:880d2a1754b502ce83ca2e",
+            measurementId: "G-FKZMTZX97S"
         };
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const database = getDatabase(app);
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
 
-        const usernameInput = document.getElementById('username');
-        const emailInput = document.getElementById('email');
-        const passwordInput = document.getElementById('password');
-        const signUpForm = document.getElementById('sign-up-form');
-        const usernameError = document.getElementById('username-error');
-        const emailError = document.getElementById('email-error');
+        // Handle Sign-up form submission
+        document.getElementById("sign-up-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form from submitting
 
-        // Function to generate a random 4-digit number
-        function generateRandomNumber() {
-            return Math.floor(1000 + Math.random() * 9000);
-        }
+            const firstName = document.getElementById("first-name").value;
+            const lastName = document.getElementById("last-name").value;
+            const username = document.getElementById("username").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const country = document.getElementById("country").value;
 
-        // Function to validate username
-        function isValidUsername(username) {
-            const minLength = 4;
-            const swearWords = ['niger', 'gay', 'adofhittler', 'neger'];
-            if (username.length < minLength) {
-                return false;
-            }
-            for (const swear of swearWords) {
-                if (username.toLowerCase().includes(swear)) {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        signUpForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const username = usernameInput.value.trim();
-            const email = emailInput.value.trim();
-            const password = passwordInput.value;
-
-            if (!isValidUsername(username)) {
-                usernameError.textContent = "Invalid username. It must be at least 4 characters long and cannot contain inappropriate words.";
-                usernameError.style.display = 'block';
-                return;
-            }
-
-            usernameError.style.display = 'none';
-
-            createUserWithEmailAndPassword(auth, email, password)
+            // Firebase Authentication - Create user
+            auth.createUserWithEmailAndPassword(email, password)
                 .then((userCredential) => {
                     const user = userCredential.user;
-                    const uid = user.uid;
-                    const uniqueUsername = `${username}#${generateRandomNumber()}`;
 
-                    // Update user profile with username
-                    updateProfile(user, { displayName: uniqueUsername })
-                        .then(() => {
-                            // Save additional user info to the database
-                            set(ref(database, 'users/' + uid), {
-                                username: uniqueUsername,
-                                email: email,
-                                accountLocked: false
-                            });
-                            console.log('User signed up and data saved:', user);
-                            window.location.href = '/404'; 
-                        })
-                        .catch((error) => {
-                            console.error('Error updating profile:', error);
-                        });
+                    // User UID
+                    const userUid = user.uid;
+
+                    // Save user data to Firestore
+                    db.collection("users").doc(userUid).set({
+                        firstName: firstName,
+                        lastName: lastName,
+                        username: username,
+                        email: email,
+                        country: country,
+                        accountLock: false, // Default value
+                        uid: userUid
+                    })
+                    .then(() => {
+                        console.log("User data added to Firestore!");
+                        alert("Sign-up successful!");
+                    })
+                    .catch((error) => {
+                        console.error("Error adding user data to Firestore:", error);
+                    });
+
                 })
                 .catch((error) => {
-                    console.error('Error signing up:', error);
-                    if (error.code === 'auth/email-already-in-use') {
-                        emailError.textContent = 'Email already in use';
-                        emailError.style.display = 'block';
-                    } else {
-                        emailError.textContent = 'Error signing up. Please try again.';
-                        emailError.style.display = 'block';
-                    }
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.error("Error during sign-up:", errorCode, errorMessage);
+                    document.getElementById("email-error").textContent = errorMessage;
                 });
         });
-
     </script>
+
 </body>
 </html>

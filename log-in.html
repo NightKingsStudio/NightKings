@@ -21,7 +21,7 @@
     <!-- Firebase Scripts (using the modular approach) -->
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js';
-        import { getAuth, fetchSignInMethodsForEmail, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
+        import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
 
         // Firebase configuration
         const firebaseConfig = {
@@ -38,63 +38,68 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // Elements
-            const emailInput = document.getElementById('email');
-            const passwordGroup = document.querySelector('.password-group');
-            const submitButton = document.querySelector('.login-button');
-            const emailError = document.getElementById('email-error');
+        // Helper function to validate email format
+        function isValidEmail(email) {
+            // Basic email validation regex
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailPattern.test(email);
+        }
 
-            // Check email
-            emailInput.addEventListener('blur', function() {
-                const email = emailInput.value;
-                console.log('Checking email:', email);
-                if (email) {
-                    fetchSignInMethodsForEmail(auth, email)
-                        .then(function(signInMethods) {
-                            console.log('Sign-in methods:', signInMethods);
-                            if (signInMethods.length > 0) {
-                                passwordGroup.style.display = 'block';
-                                submitButton.disabled = false;
-                                emailError.style.display = 'none';
-                            } else {
-                                emailError.textContent = "Email not found";
-                                emailError.style.display = 'block';
-                                passwordGroup.style.display = 'none';
-                                submitButton.disabled = true;
-                            }
-                        })
-                        .catch(function(error) {
-                            console.error("Error checking email:", error);
-                            emailError.textContent = "Error checking email";
-                            emailError.style.display = 'block';
-                            passwordGroup.style.display = 'none';
-                            submitButton.disabled = true;
-                        });
-                } else {
-                    emailError.textContent = "Please enter an email";
-                    emailError.style.display = 'block';
-                    passwordGroup.style.display = 'none';
-                    submitButton.disabled = true;
+        // Login Functionality
+        document.addEventListener("DOMContentLoaded", function() {
+            const loginForm = document.getElementById("login-form");
+            const emailInput = document.getElementById("email");
+            const passwordInput = document.getElementById("password");
+            const emailError = document.getElementById("email-error");
+            const loginButton = document.querySelector(".login-button");
+
+            // Enable login button when both email and password are filled
+            loginForm.addEventListener("input", function() {
+                const email = emailInput.value.trim().toLowerCase();
+                const password = passwordInput.value;
+                
+                // Validate email format
+                if (!isValidEmail(email)) {
+                    emailError.textContent = "Please enter a valid email.";
+                    emailError.style.display = "block";
+                    loginButton.disabled = true;
+                    return;
                 }
+
+                emailError.style.display = "none";
+                loginButton.disabled = !email || !password;
             });
 
-            // Login form submission
-            const loginForm = document.getElementById('login-form');
-            loginForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const email = emailInput.value;
-                const password = document.getElementById('password').value;
+            // Handle form submission for login
+            loginForm.addEventListener("submit", function(event) {
+                event.preventDefault();
+                const email = emailInput.value.trim().toLowerCase();  // Convert email to lowercase
+                const password = passwordInput.value;
 
+                // Attempt to log in with Firebase Auth
                 signInWithEmailAndPassword(auth, email, password)
-                    .then(function(userCredential) {
+                    .then((userCredential) => {
+                        // Signed in successfully
                         const user = userCredential.user;
-                        console.log('Logged in:', user);
+                        console.log("Login successful for:", user.email);
+                        alert("Login successful! Redirecting...");
+                        window.location.href = "/dashboard";  // Change this to your desired redirect
                     })
-                    .catch(function(error) {
-                        console.error("Login error:", error);
-                        emailError.textContent = "Login error. Please check your email and password.";
-                        emailError.style.display = 'block';
+                    .catch((error) => {
+                        // Handle error codes from Firebase
+                        const errorCode = error.code;
+                        let errorMessage = "Login failed. Please try again.";
+
+                        if (errorCode === 'auth/user-not-found') {
+                            errorMessage = "No user found with this email.";
+                        } else if (errorCode === 'auth/wrong-password') {
+                            errorMessage = "Incorrect password. Please try again.";
+                        } else if (errorCode === 'auth/invalid-email') {
+                            errorMessage = "Invalid email format.";
+                        }
+
+                        emailError.textContent = errorMessage;
+                        emailError.style.display = "block";
                     });
             });
         });
@@ -121,14 +126,14 @@
                         <input type="email" id="email" name="email" placeholder="Enter your email" required>
                         <span id="email-error" class="error-message" style="display: none;"></span>
                     </div>
-                    <div class="input-group password-group" style="display: none;">
+                    <div class="input-group password-group">
                         <label for="password">Password</label>
                         <input type="password" id="password" name="password" placeholder="Enter your password" required>
                     </div>
                     <button type="submit" class="login-button" disabled>Log In</button>
                 </form>
                 <div class="sign-up-text">
-                    <a href="/sign-in" class="sign-up-link">Go back</a>
+                    <a href="sign-in" class="sign-up-link">Go back</a>
                 </div>
             </div>
         </section>

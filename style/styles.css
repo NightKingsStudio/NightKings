@@ -1355,6 +1355,39 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
     background-color: #45009d;
 }
 
+/* Country select styling */
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #000;
+    color: white;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    appearance: none; /* Remove default dropdown arrow */
+    background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>'); /* Custom dropdown arrow */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+}
+
+select:focus {
+    border-color: #5b00d3;
+    outline: none;
+}
+
+select option {
+    background-color: #000;
+    color: white;
+}
+
+/* Adjust appearance of dropdown arrow for better spacing */
+select {
+    padding-right: 40px; /* Ensures space for custom arrow */
+}
+
+
 /* Sign-in text below the form */
 .sign-in-text {
     text-align: center;
