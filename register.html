@@ -76,7 +76,7 @@
 
                     <div class="checkbox-group">
                         <input type="checkbox" id="terms" name="terms" required>
-                        <label for="terms">I have read and agree to the <a href="">terms of service</a></label>
+                        <label for="terms">I have read and agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
                     </div>
 
                     <!-- Sign Up Button -->
@@ -84,7 +84,7 @@
                 </form>
 
                 <div class="sign-in-text">
-                    <a href="sign-in" class="sign-in-link">Already have an account? Sign in</a>
+                    <a href="sign-in" class="sign-in-link">Go Back</a>
                 </div>
             </div>
         </section>
@@ -92,72 +92,6 @@
 
     <div id="footer-placeholder"></div>
 
-    <style>
-        
-        /* Set the background of the whole page to black */
-body {
-    background-color: black;
-}
-
-/* Page container */
-.page-container {
-    background-color: black;
-    display: flex;
-    justify-content: flex-start; 
-    align-items: center;
-    width: 100%;
-    max-width: 1200px;
-    padding: 20px;
-    z-index: 2;
-}
-
-/* Ensure the form and content are still on top of the overlay */
-.sign-up-form-container {
-    position: relative;
-    z-index: 3; /* Above the overlay */
-}
-
-/* Ensure the header has a black background */
-#header-placeholder {
-    background-color: black;
-    z-index: 3; /* Keep it above the overlay */
-}
-
-/* Background video */
-#background-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
-}
-
-/* Adjust the diagonal black overlay to cover more of the screen */
-.diagonal-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(60deg, black 20%, transparent 20%);
-    z-index: 2; /* Above the video but below the form */
-}
-
-/* Ensure the overlay remains semi-transparent if needed */
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
-    z-index: 1;
-}
-
-
-    </style>
 
     <!-- Firebase scripts (non-modular CDN version) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -201,8 +135,7 @@ body {
 
                     // Save user data to Firestore
                     db.collection("users").doc(userUid).set({
-                        firstName: firstName,
-                        lastName: lastName,
+                        fullname: firstName + " " + lastName, // Correct string concatenation
                         username: username,
                         email: email,
                         country: country,
